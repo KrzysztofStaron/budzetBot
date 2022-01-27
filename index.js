@@ -21,6 +21,26 @@ client.on('messageCreate', (msg) => {
       show(msg)
     }
   }
+
+  var today = new Date();
+  var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
+
+  if (!fs.existsSync(date+".json")){
+      fs.writeFileSync(date+'.json', '{"m":[]}');
+  }
+
+  var mes = {
+    "autor": msg.member.user.tag,
+    "constent": msg.content,
+    "date": date,
+    "time": time
+  }
+
+  let messages = JSON.parse(fs.readFileSync(date+".json"), "utf8")
+  messages.m.push(mes);
+  fs.writeFileSync(date+'.json', JSON.stringify(messages));
 });
 
 function show(msg) {
@@ -43,7 +63,7 @@ function show(msg) {
     (data.zl100 * 100) +
     (data.zl200 * 200) +
     (data.zl500 * 500);
-    
+
   const showEmbed = new MessageEmbed()
     .setColor('#FFD700')
     .setTitle(suma + " PLN")
@@ -67,4 +87,4 @@ function show(msg) {
 
   msg.channel.send({ embeds: [showEmbed] })
 }
-client.login("OTA4Mjg4Mzk3NTExMTMxMTY2.YYzjfQ.KYzFUotM5BHiumT_4Xz6hH7urmg");
+client.login("OTA4Mjg4Mzk3NTExMTMxMTY2.YYzjfQ.lUrBtM5cvGCrTNui--vhholoicw");
