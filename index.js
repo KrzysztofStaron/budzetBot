@@ -8,6 +8,7 @@ const prefix = "$";
 
 client.on('ready', () => {
   console.log(`Bot starto`);
+  client.channels.cache.get('887678982026326031').send("wejdź w ten link toprzestane");
 });
 
 client.on('messageCreate', (msg) => {
@@ -15,32 +16,13 @@ client.on('messageCreate', (msg) => {
     msg.guild.me.setNickname(`BudżetBot[${prefix}]`);
     console.log("Nickname Updated");
   }
+
   let args = msg.content.split(" ");
   if (args[0] == `${prefix}`){
     if (args[1] == "show") {
       show(msg)
     }
   }
-
-  var today = new Date();
-  var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var dateTime = date+' '+time;
-
-  if (!fs.existsSync(date+".json")){
-      fs.writeFileSync(date+'.json', '{"m":[]}');
-  }
-
-  var mes = {
-    "autor": msg.member.user.tag,
-    "constent": msg.content,
-    "date": date,
-    "time": time
-  }
-
-  let messages = JSON.parse(fs.readFileSync(date+".json"), "utf8")
-  messages.m.push(mes);
-  fs.writeFileSync(date+'.json', JSON.stringify(messages));
 });
 
 function show(msg) {
@@ -87,4 +69,4 @@ function show(msg) {
 
   msg.channel.send({ embeds: [showEmbed] })
 }
-client.login("OTA4Mjg4Mzk3NTExMTMxMTY2.YYzjfQ.lUrBtM5cvGCrTNui--vhholoicw");
+client.login("OTA4Mjg4Mzk3NTExMTMxMTY2.YYzjfQ.7-QU17FVLG2X5m33MUU3eUVe2Z8");
